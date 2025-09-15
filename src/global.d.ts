@@ -1,4 +1,5 @@
 interface WebApp {
+  initDataUnsafe: string;
   initData: string;
   ready(): void;
 }

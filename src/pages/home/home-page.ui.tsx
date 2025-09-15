@@ -5,7 +5,7 @@ import './home-page.styles.scss';
 
 export default function HomePage() {
   const { session } = useAuth();
-  const initData = window.Telegram?.WebApp.initData;
+  const initData = window.Telegram?.WebApp.initDataUnsafe;
   return (
     <PageLayout>
       <h1>Home Page</h1>
