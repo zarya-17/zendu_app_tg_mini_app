@@ -5,12 +5,14 @@ import './home-page.styles.scss';
 
 export default function HomePage() {
   const { session } = useAuth();
-  const initData = window.Telegram?.WebApp?.initDataUnsafe;
+  const initDataUnsafe = window.Telegram?.WebApp?.initDataUnsafe;
   return (
     <PageLayout>
       <h1>Home Page</h1>
       <div className="textObject">Session: {JSON.stringify(session)}</div>
-      <div className="textObject">Telegram WebApp initData: {initData}</div>
+      <div className="textObject">
+        Telegram WebApp initData: {JSON.stringify(initDataUnsafe)}
+      </div>
     </PageLayout>
   );
 }
