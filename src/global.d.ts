@@ -1,5 +1,5 @@
 interface WebApp {
-  initDataUnsafe: string;
+  initDataUnsafe?: string;
   initData: string;
   ready(): void;
 }
@@ -13,5 +13,16 @@ declare global {
     Telegram: Telegram;
   }
 }
+
+declare module '*.svg' {
+  import * as React from 'react';
+  const ReactComponent: React.FC<React.SVGProps<SVGSVGElement>>;
+  export default ReactComponent;
+}
+
+declare module '*.gif';
+declare module '*.png';
+declare module '*.jpg';
+declare module '*.jpeg';
 
 export {};

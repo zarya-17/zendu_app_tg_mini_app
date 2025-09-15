@@ -1,7 +1,7 @@
 export class AuthService {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   static async signIn(_initData: string) {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1500));
 
     const mockUser = {
       id: '1',
