@@ -12,15 +12,20 @@ export function BrowserRouter() {
   return <RouterProvider router={browserRouter} />;
 }
 
-const browserRouter = createBrowserRouter([
+const browserRouter = createBrowserRouter(
+  [
+    {
+      children: [
+        homePageRoute,
+        page404Route,
+        {
+          path: '*',
+          loader: async () => redirect(pathKeys.page404),
+        },
+      ],
+    },
+  ],
   {
-    children: [
-      homePageRoute,
-      page404Route,
-      {
-        path: '*',
-        loader: async () => redirect(pathKeys.page404),
-      },
-    ],
-  },
-]);
+    basename: import.meta.env.PROD ? '/zendu_app_tg_mini_app' : undefined,
+  }
+);

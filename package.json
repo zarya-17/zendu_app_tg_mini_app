@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "lint:css": "stylelint \"src/**/*.scss\"",
     "preview": "vite preview",
-    "prepare": "husky"
+    "prepare": "husky",
+    "deploy": "npm run build && cp dist/index.html dist/404.html"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.65.1",
