@@ -1,10 +1,12 @@
 name: Deploy to GitHub Pages
 
+# Запуск workflow при пуше в твою ветку
 on:
   push:
     branches:
-      - develop
+      - feature/auth-configuration
 
+# Права для Actions
 permissions:
   contents: read
   pages: write
@@ -14,24 +16,37 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # Шаг 1: Клонируем репозиторий
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Шаг 2: Устанавливаем Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
+      # Шаг 3: Устанавливаем зависимости
       - name: Install dependencies
         run: npm ci
 
+      # Шаг 4: Строим проект (npm run build)
       - name: Build project
         run: npm run build
 
+      # Шаг 5: Проверяем содержимое dist (добавленный шаг для дебага)
+      - name: Check dist content
+        run: |
+          echo "Files in dist:"
+          ls -R dist
+        # ✅ Комментарий: этот шаг поможет убедиться, что index.html и 404.html на месте
+
+      # Шаг 6: Загружаем папку dist как артефакт
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+        # ✅ Комментарий: артефакт нужен для следующего шага деплоя
 
   deploy:
     needs: build
@@ -40,6 +55,9 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      # Шаг 7: Деплой на GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        # ✅ Комментарий: этот шаг берёт артефакт dist и публикует на Pages
+        # Обратите внимание: deploy-pages сам управляет страницами, отдельной ветки gh-pages не нужно
